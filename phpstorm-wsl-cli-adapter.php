@@ -2,28 +2,52 @@
 
 declare(strict_types=1);
 
-$cmdPath = '/mnt/c/jetbrains-shell-scripts/PhpStorm.cmd';
-$pattern = '@start "" %waitarg% (.):\\\\(.+) %ideargs%@';
+$windowsCmdPath = $argv[1];
+$cmdPath = windowsPathToWSLMountPath($windowsCmdPath);
+$phpStormPath = windowsPathToWSLMountPath(extractPhpStormExePathFromScript($cmdPath));
+$phpStormArgs = buildPhpStormArgs($argv);
 
-preg_match($pattern, file_get_contents($cmdPath), $matches);
+callPhpStorm($phpStormPath, $phpStormArgs);
 
-$phpstormWindowsDrive = $matches[1];
-$phpstormWindowsPath = $matches[2];
+function windowsPathToWSLMountPath(string $windowsPath): string
+{
+    $pattern = '@^(\w+):\\\\(.+)@';
+    preg_match($pattern, $windowsPath, $matches);
 
-$wslMountPath = sprintf(
-    '/mnt/%s/%s',
-    strtolower($phpstormWindowsDrive),
-    str_replace('\\', '/', $phpstormWindowsPath)
-);
+    $drive = $matches[1];
+    $path = $matches[2];
 
-$phpstormArgs = $argv;
-array_shift($phpstormArgs);
-$phpstormArgs = join(' ', $phpstormArgs);
+    return sprintf(
+        '/mnt/%s/%s',
+        strtolower($drive),
+        str_replace('\\', '/', $path)
+    );
+}
 
-$command = sprintf(
-    '%s %s',
-    $wslMountPath,
-    $phpstormArgs
-);
+function extractPhpStormExePathFromScript(string $scriptPath): string
+{
+    $pattern = '@start "" %waitarg% (\w+:\\\\.+) %ideargs%@';
 
-shell_exec($command);
+    preg_match($pattern, file_get_contents($scriptPath), $matches);
+
+    return $matches[1];
+}
+
+function buildPhpStormArgs(array $phpArgs): array
+{
+    array_shift($phpArgs);
+    array_shift($phpArgs);
+
+    return $phpArgs;
+}
+
+function callPhpStorm(string $phpStormPath, array $phpStormArgs): void
+{
+    $command = sprintf(
+        '%s %s',
+        $phpStormPath,
+        join($phpStormArgs)
+    );
+
+    shell_exec($command);
+}
