@@ -46,7 +46,7 @@ function callPhpStorm(string $phpStormPath, array $phpStormArgs): void
     $command = sprintf(
         '%s %s',
         $phpStormPath,
-        join($phpStormArgs)
+        join(' ', $phpStormArgs)
     );
 
     shell_exec($command);
