@@ -3,7 +3,7 @@
 This script allows you to use the CLI of PhpStorm for Windows via WSL.
 
 ## Requirements
-- PHPStorm installed via JetBrains Toolbox
+- PhpStorm installed via JetBrains Toolbox
 - PHP >= 7.1
 
 ## Preparation
