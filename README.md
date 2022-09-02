@@ -1,9 +1,9 @@
-# PhpStorm WSL CLI adapter
+# JetBrains WSL CLI adapter
 
-This script allows you to use the CLI of PhpStorm for Windows via WSL.
+This script allows you to use the CLI of JetBrains IDEs for Windows via WSL.
 
 ## Requirements
-- PhpStorm installed via JetBrains Toolbox
+- IDE installed via JetBrains Toolbox
 - PHP >= 7.1
 
 ## Preparation
@@ -17,4 +17,4 @@ This script allows you to use the CLI of PhpStorm for Windows via WSL.
 7. Re-source your file containing the alias (e.g. `source ~/.bashrc`)
 
 ## Usage
-You should be able to use PhpStorm CLI from WSL shell. For example in this repository: `phpstorm README.md` should open the README.md in PhpStorm.
+You should be able to use IDE CLI from WSL shell. For example in this repository: `phpstorm README.md` should open the README.md in PhpStorm.
