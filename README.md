@@ -10,10 +10,10 @@ This script allows you to use the CLI of JetBrains IDEs for Windows via WSL.
 1. Open JetBrains Toolbox
 2. Go to Settings
 3. Enable "Tools" > "Generate shell scripts" and select a location for the generated shell scripts, e.g. `C:\jetbrains-shell-scripts\`
-4. Check, if shell script for PhpStorm was generated (e.g. `C:\jetbrains-shell-scripts\PhpStorm.cmd`)
-5. Clone this repository, e.g. to `/home/ubuntu/phpstorm-wsl-cli-adapter/`
+4. Check, if shell script for IDE was generated (e.g. `C:\jetbrains-shell-scripts\PhpStorm.cmd`)
+5. Clone this repository, e.g. to `/home/ubuntu/jetbrains-wsl-cli-adapter/`
 6. Create alias (e.g. in `~/.bashrc`):
-    `alias phpstorm='php /home/ubuntu/phpstorm-wsl-cli-adapter/phpstorm-wsl-cli-adapter.php "C:\jetbrains-shell-scripts\PhpStorm.cmd"'`
+    `alias phpstorm='php /home/ubuntu/jetbrains-wsl-cli-adapter/jetbrains-wsl-cli-adapter.php "C:\jetbrains-shell-scripts\PhpStorm.cmd"'`
 7. Re-source your file containing the alias (e.g. `source ~/.bashrc`)
 
 ## Usage
